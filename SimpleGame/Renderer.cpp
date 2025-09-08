@@ -46,6 +46,22 @@ void Renderer::CreateVertexBufferObjects()
 	glGenBuffers(1, &m_VBORect);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBORect);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(rect), rect, GL_STATIC_DRAW);
+
+	//lecture2
+	float test[]
+		=
+	{
+		0.f, 0.f, 0.f,
+		1.f, 0.f, 0.f,
+		1.f, 1.f, 0.f	//triangle
+	};
+
+	glGenBuffers(1, &m_VBOTest);	//버퍼의 크기를 얼마나 할당해야 하는 지 전달	 받지 못했다.
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTest);	// 4:40까지, 이해 못하겠음. bind는 과할 정도로 필요할 때 마다 불러주는 게 좋다. 안쓰면 쓸모 없어짐.
+	// gpt : 현재 선택된 버퍼, 방금 받은 택배 -> 현재 자업 중인 상자
+	//GL ARRAY BUFFER의 방에서 testID 상자로 일하는 걸로 말씀하시는 거 같다.
+	glBufferData(GL_ARRAY_BUFFER, sizeof(test), test, GL_STATIC_DRAW);	//test 데이터로 그리는 것 
+
 }
 
 void Renderer::AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType)
@@ -183,6 +199,28 @@ void Renderer::DrawSolidRect(float x, float y, float z, float size, float r, flo
 	glVertexAttribPointer(attribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	glDisableVertexAttribArray(attribPosition);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void Renderer::DrawTest()
+{
+	//Program select
+	glUseProgram(m_SolidRectShader);
+
+	glUniform4f(glGetUniformLocation(m_SolidRectShader, "u_Trans"), 0, 0, 0, 1);
+	glUniform4f(glGetUniformLocation(m_SolidRectShader, "u_Color"), 1, 1, 1, 1);
+	int attribPosition = glGetAttribLocation(m_SolidRectShader, "a_Position");
+
+	glEnableVertexAttribArray(attribPosition);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTest);
+	glVertexAttribPointer(
+		attribPosition, 3, GL_FLOAT, 
+		GL_FALSE, sizeof(float) * 3, 0);
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glDisableVertexAttribArray(attribPosition);
 
