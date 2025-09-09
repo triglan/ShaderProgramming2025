@@ -12,3 +12,6 @@
 *.suo 
 *.db 
 
+##folders
+Debug/
+Release

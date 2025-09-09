@@ -47,20 +47,36 @@ void Renderer::CreateVertexBufferObjects()
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBORect);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(rect), rect, GL_STATIC_DRAW);
 
-	//lecture2
-	float test[]
+	//lecture2 vertex shader
+	float testPos[]
 		=
 	{
 		0.f, 0.f, 0.f,
 		1.f, 0.f, 0.f,
 		1.f, 1.f, 0.f	//triangle
 	};
+	//lecture2-2 교수님의 윗둥 잘린 삼각형 버전
 
-	glGenBuffers(1, &m_VBOTest);	//버퍼의 크기를 얼마나 할당해야 하는 지 전달	 받지 못했다.
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTest);	// 4:40까지, 이해 못하겠음. bind는 과할 정도로 필요할 때 마다 불러주는 게 좋다. 안쓰면 쓸모 없어짐.
+	glGenBuffers(1, &m_VBOTestPos);	//버퍼의 크기를 얼마나 할당해야 하는 지 전달	 받지 못했다.
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestPos);	// 4:40까지, 이해 못하겠음. bind는 과할 정도로 필요할 때 마다 불러주는 게 좋다. 안쓰면 쓸모 없어짐.
 	// gpt : 현재 선택된 버퍼, 방금 받은 택배 -> 현재 자업 중인 상자
 	//GL ARRAY BUFFER의 방에서 testID 상자로 일하는 걸로 말씀하시는 거 같다.
-	glBufferData(GL_ARRAY_BUFFER, sizeof(test), test, GL_STATIC_DRAW);	//test 데이터로 그리는 것 
+	glBufferData(GL_ARRAY_BUFFER, sizeof(testPos), testPos, GL_STATIC_DRAW);	//test 데이터로 그리는 것 
+	
+	//lecture 2-2 Color
+	float testColor[]
+		=
+	{
+		1.f, 0.f, 0.f, 1.f,
+		0.f, 1.f, 0.f, 1.f,
+		0.f, 0.f, 1.f, 1.f,
+	};
+
+	glGenBuffers(1, &m_VBOTestColor);	//버퍼의 크기를 얼마나 할당해야 하는 지 전달	 받지 못했다.
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestColor);	// 4:40까지, 이해 못하겠음. bind는 과할 정도로 필요할 때 마다 불러주는 게 좋다. 안쓰면 쓸모 없어짐.
+	// gpt : 현재 선택된 버퍼, 방금 받은 택배 -> 현재 자업 중인 상자
+	//GL ARRAY BUFFER의 방에서 testID 상자로 일하는 걸로 말씀하시는 거 같다.
+	glBufferData(GL_ARRAY_BUFFER, sizeof(testColor), testColor, GL_STATIC_DRAW);	//test 데이터로 그리는 것 
 
 }
 
@@ -212,17 +228,25 @@ void Renderer::DrawTest()
 
 	glUniform4f(glGetUniformLocation(m_SolidRectShader, "u_Trans"), 0, 0, 0, 1);
 	glUniform4f(glGetUniformLocation(m_SolidRectShader, "u_Color"), 1, 1, 1, 1);
-	int attribPosition = glGetAttribLocation(m_SolidRectShader, "a_Position");
 
-	glEnableVertexAttribArray(attribPosition);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTest);
+	int aPosLoc = glGetAttribLocation(m_SolidRectShader, "a_Position");
+	int aColLoc = glGetAttribLocation(m_SolidRectShader, "a_Color");
+	glEnableVertexAttribArray(aPosLoc);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestPos);
 	glVertexAttribPointer(
-		attribPosition, 3, GL_FLOAT, 
+		aPosLoc, 3, GL_FLOAT,
 		GL_FALSE, sizeof(float) * 3, 0);
+	glDrawArrays(GL_TRIANGLES, 3, 4);
 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//lecture2-2 이 네가지 단계가 중요한 듯
+	glEnableVertexAttribArray(aColLoc);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestColor);
+	glVertexAttribPointer(
+		aColLoc, 4, GL_FLOAT,
+		GL_FALSE, sizeof(float) * 4, 0);
+	glDrawArrays(GL_TRIANGLES, 0, 4);
 
-	glDisableVertexAttribArray(attribPosition);
+	glDisableVertexAttribArray(aPosLoc);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
