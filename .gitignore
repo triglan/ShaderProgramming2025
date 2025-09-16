@@ -10,7 +10,7 @@
 *.tlog 
 *.lastbuildstate 
 *.suo 
-*.db 
+*.db
 
 ##folders
 Debug/

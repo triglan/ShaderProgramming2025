@@ -9,6 +9,7 @@ uniform vec4 u_Color;
 void main()
 {
 	//FragColor = vec4(u_Color.r, u_Color.g, u_Color.b, u_Color.a);
+	//보간을 통해 삼각형 자르기
 	if(v_Color.b < 0.5)
 		FragColor = v_Color;
 	else
