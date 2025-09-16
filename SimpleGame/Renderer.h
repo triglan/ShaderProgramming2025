@@ -37,5 +37,9 @@ private:
 	GLuint m_VBOTestPos = 0;
 	GLuint m_VBOTestColor = 0;
 	GLuint m_TestShader = 0;
+
+	//lec3
+	float m_time = 0;
+
 };
 

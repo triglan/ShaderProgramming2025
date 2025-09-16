@@ -52,7 +52,7 @@ void Renderer::CreateVertexBufferObjects()
 	//lecture3 test
 	//lec3 사각형으로 보내는 2번 쨰 방법
 	float temp = 0.5f;
-	float size = 0.1f;
+	float size = 0.3f;
 
 	float testPos[]
 		=
@@ -234,8 +234,13 @@ void Renderer::DrawSolidRect(float x, float y, float z, float size, float r, flo
 
 void Renderer::DrawTest()
 {
+	m_time += 0.00012;
+
 	//Program select
 	glUseProgram(m_TestShader);
+
+	int uTimeLoc = glGetUniformLocation(m_TestShader, "u_Time"); // lec3 시간 셰이더
+	glUniform1f(uTimeLoc, m_time);
 
 	int aPosLoc = glGetAttribLocation(m_TestShader, "a_Position");
 	int aColLoc = glGetAttribLocation(m_TestShader, "a_Color");
