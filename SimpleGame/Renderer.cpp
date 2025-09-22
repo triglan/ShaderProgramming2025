@@ -25,6 +25,8 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	//Create VBOs
 	CreateVertexBufferObjects();
 
+	GenerateParticles(1000);
+
 	if (m_SolidRectShader > 0 && m_VBORect > 0)
 	{
 		m_Initialized = true;
@@ -286,8 +288,137 @@ void Renderer::DrawTest()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+void Renderer::DrawParticle()
+{
+	m_time += 0.00012;
+
+	//Program select
+	GLuint shader = m_ParticleShader;
+	glUseProgram(shader);
+
+	int uTimeLoc = glGetUniformLocation(shader, "u_Time");
+	glUniform1f(uTimeLoc, m_time);
+
+	int aPosLoc = glGetAttribLocation(shader, "a_Position");
+	int aRadiusLoc = glGetAttribLocation(shader, "a_Radius");
+	int aColLoc = glGetAttribLocation(shader, "a_Color");
+
+	glEnableVertexAttribArray(aPosLoc);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOParticle);
+	glVertexAttribPointer(
+		aPosLoc, 3, GL_FLOAT,
+		GL_FALSE, sizeof(float) * 8, 0);
+
+	glEnableVertexAttribArray(aRadiusLoc);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOParticle);
+	glVertexAttribPointer(
+		aRadiusLoc, 1, GL_FLOAT,
+		GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 3));
+
+	glEnableVertexAttribArray(aColLoc);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOParticle);
+	glVertexAttribPointer(
+		aColLoc, 4, GL_FLOAT,
+		GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 4));
+	glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
+
+	glDisableVertexAttribArray(aPosLoc);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 void Renderer::GetGLPosition(float x, float y, float *newX, float *newY)
 {
 	*newX = x * 2.f / m_WindowSizeX;
 	*newY = y * 2.f / m_WindowSizeY;
+}
+
+void Renderer::GenerateParticles(int numParticle)
+{
+	int floatCountPerVertex = 3 + 1 + 4;//x, y, z, value, r, g, b, a
+	int verticesCountPerParticle = 6;
+	int floatCountPerParticle = floatCountPerVertex * verticesCountPerParticle;
+	int totalVerticesCount = numParticle * verticesCountPerParticle;
+	int totalFloatCount = floatCountPerVertex * totalVerticesCount;//전체 필요한 float의 개수
+	
+	float* vertices = new float[totalFloatCount];
+
+	for (int i = 0; i < numParticle; i++) {
+		float x, y, z, value, r, g, b, a;
+		x = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
+		y = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
+		z = 0.f;
+		value = (float)rand() / (float)RAND_MAX;
+		r = (float)rand() / (float)RAND_MAX;
+		g = (float)rand() / (float)RAND_MAX;
+		b = (float)rand() / (float)RAND_MAX;
+		a = (float)rand() / (float)RAND_MAX;
+		float size;
+		size = (float)rand() / (float)RAND_MAX * 0.01;
+
+		int index = i * floatCountPerVertex * verticesCountPerParticle;	//v1
+		vertices[index] = x - size; index++;
+		vertices[index] = y - size; index++;
+		vertices[index] = z; index++;
+		vertices[index] = value; index++;
+		vertices[index] = r; index++;
+		vertices[index] = g; index++;
+		vertices[index] = b; index++;
+		vertices[index] = a; index++;
+
+		vertices[index] = x + size; index++;//v2
+		vertices[index] = y + size; index++;
+		vertices[index] = z; index++;
+		vertices[index] = value; index++;
+		vertices[index] = r; index++;
+		vertices[index] = g; index++;
+		vertices[index] = b; index++;
+		vertices[index] = a; index++;
+
+		vertices[index] = x - size; index++;//v3
+		vertices[index] = y + size; index++;
+		vertices[index] = z; index++;
+		vertices[index] = value; index++;
+		vertices[index] = r; index++;
+		vertices[index] = g; index++;
+		vertices[index] = b; index++;
+		vertices[index] = a; index++;
+
+		vertices[index] = x - size; index++;//v4
+		vertices[index] = y - size; index++;
+		vertices[index] = z; index++;
+		vertices[index] = value; index++;
+		vertices[index] = r; index++;
+		vertices[index] = g; index++;
+		vertices[index] = b; index++;
+		vertices[index] = a; index++;
+
+		vertices[index] = x + size; index++;//v5
+		vertices[index] = y - size; index++;
+		vertices[index] = z; index++;
+		vertices[index] = value; index++;
+		vertices[index] = r; index++;
+		vertices[index] = g; index++;
+		vertices[index] = b; index++;
+		vertices[index] = a; index++;
+
+		vertices[index] = x + size; index++;//v6
+		vertices[index] = y + size; index++;
+		vertices[index] = z; index++;
+		vertices[index] = value; index++;
+		vertices[index] = r; index++;
+		vertices[index] = g; index++;
+		vertices[index] = b; index++;
+		vertices[index] = a; index++;
+
+	}
+
+
+	glGenBuffers(1, &m_VBOParticle);	//버퍼의 크기를 얼마나 할당해야 하는 지 전달	 받지 못했다.
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOParticle);	// 4:40까지, 이해 못하겠음. bind는 과할 정도로 필요할 때 마다 불러주는 게 좋다. 안쓰면 쓸모 없어짐.
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * totalFloatCount, vertices, GL_STATIC_DRAW);	//test 데이터로 그리는 것 
+
+	delete [] vertices;
+
+	m_VBOParticleVertexCount = totalVerticesCount;
 }
