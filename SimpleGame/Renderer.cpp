@@ -20,6 +20,7 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	//Load shaders
 	m_SolidRectShader = CompileShaders("./Shaders/SolidRect.vs", "./Shaders/SolidRect.fs");
 	m_TestShader = CompileShaders("./Shaders/Test.vs", "./Shaders/Test.fs");
+	m_ParticleShader = CompileShaders("./Shaders/Particle.vs", "./Shaders/Particle.fs");
 	
 	//Create VBOs
 	CreateVertexBufferObjects();
@@ -52,17 +53,24 @@ void Renderer::CreateVertexBufferObjects()
 	//lecture3 test
 	//lec3 사각형으로 보내는 2번 쨰 방법
 	float temp = 0.5f;
-	float size = 0.3f;
+	float size = 0.15f;
 
 	float testPos[]
 		=
 	{
-		(0.f - temp) * size, (0.f - temp) * size, 0.f,
-		(1.f - temp) * size, (0.f - temp) * size, 0.f,
-		(1.f - temp) * size, (1.f - temp) * size, 0.f,	//triangle
-		(0.f - temp) * size, (0.f - temp) * size, 0.f,
-		(1.f - temp) * size, (1.f - temp) * size, 0.f,
-		(0.f - temp) * size, (1.f - temp) * size, 0.f	//triangle2
+		(0.f - temp) * size, (0.f - temp) * size, 0.f, 0.5f,
+		(1.f - temp) * size, (0.f - temp) * size, 0.f, 0.5f,
+		(1.f - temp) * size, (1.f - temp) * size, 0.f, 0.5f,	
+		(0.f - temp) * size, (0.f - temp) * size, 0.f, 0.5f,
+		(1.f - temp) * size, (1.f - temp) * size, 0.f, 0.5f,
+		(0.f - temp) * size, (1.f - temp) * size, 0.f, 0.5f,	//Quad1
+
+		(0.f - temp) * size, (0.f - temp) * size, 0.f, 1.0f,
+		(1.f - temp) * size, (0.f - temp) * size, 0.f, 1.0f,
+		(1.f - temp) * size, (1.f - temp) * size, 0.f, 1.0f,	
+		(0.f - temp) * size, (0.f - temp) * size, 0.f, 1.0f,
+		(1.f - temp) * size, (1.f - temp) * size, 0.f, 1.0f,
+		(0.f - temp) * size, (1.f - temp) * size, 0.f, 1.0f	//Quad2
 	};
 
 	glGenBuffers(1, &m_VBOTestPos);	//버퍼의 크기를 얼마나 할당해야 하는 지 전달	 받지 못했다.
@@ -75,6 +83,12 @@ void Renderer::CreateVertexBufferObjects()
 	float testColor[]
 		=
 	{
+		1.f, 0.f , 0.f, 1.f,
+		0.f, 1.f , 0.f, 1.f,
+		0.f, 0.f , 1.f, 1.f,
+		1.f, 0.f , 0.f, 1.f,
+		0.f, 1.f , 0.f, 1.f,
+		0.f, 0.f , 1.f, 1.f,
 		1.f, 0.f , 0.f, 1.f,
 		0.f, 1.f , 0.f, 1.f,
 		0.f, 0.f , 1.f, 1.f,
@@ -243,21 +257,29 @@ void Renderer::DrawTest()
 	glUniform1f(uTimeLoc, m_time);
 
 	int aPosLoc = glGetAttribLocation(m_TestShader, "a_Position");
+	int aRadiusLoc = glGetAttribLocation(m_TestShader, "a_Radius");
 	int aColLoc = glGetAttribLocation(m_TestShader, "a_Color");
+
 	glEnableVertexAttribArray(aPosLoc);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestPos);
 	glVertexAttribPointer(
 		aPosLoc, 3, GL_FLOAT,
-		GL_FALSE, sizeof(float) * 3, 0);
-	glDrawArrays(GL_TRIANGLES, 3, 4);
+		GL_FALSE, sizeof(float) * 4, 0);
 
-	//lecture2-2 이 네가지 단계가 중요한 듯
+	//lec4-1 시험에 낼거임 glVertexAttribPointer 안에 가로 쳐놓고 1 들어가는 지 이런거
+	glEnableVertexAttribArray(aRadiusLoc);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestPos);
+	glVertexAttribPointer(
+		aRadiusLoc, 1, GL_FLOAT,
+		GL_FALSE, sizeof(float) * 4, (GLvoid*)(sizeof(float)*3));
+
+	//lecture2-2 이 네가지 단계가 중요한 듯 컬러
 	glEnableVertexAttribArray(aColLoc);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestColor);
 	glVertexAttribPointer(
 		aColLoc, 4, GL_FLOAT,
 		GL_FALSE, sizeof(float) * 4, 0);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, 12);
 
 	glDisableVertexAttribArray(aPosLoc);
 

@@ -41,5 +41,7 @@ private:
 	//lec3
 	float m_time = 0;
 
+	GLuint m_ParticleShader = 0;
+
 };
 
