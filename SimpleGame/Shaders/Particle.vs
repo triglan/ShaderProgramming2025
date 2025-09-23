@@ -6,6 +6,7 @@ in vec4 a_Color;
 
 out vec4 v_Color;
 in float a_STime;
+in vec3 a_Vel;
 
 uniform float u_Time;
 
