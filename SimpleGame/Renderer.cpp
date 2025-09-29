@@ -356,8 +356,8 @@ void Renderer::DrawParticle()
 		aVelLoc, 3, GL_FLOAT,
 		GL_FALSE, sizeof(float) * 12, (GLvoid*)(sizeof(float) * 9));
 
-	//glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
+	//glDrawArrays(GL_TRIANGLES, 0, 6);
 
 	glDisableVertexAttribArray(aPosLoc);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -387,12 +387,12 @@ void Renderer::GenerateParticles(int numParticle)
 		y = 0;// ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
 		z = 0.f;
 		value = (float)rand() / (float)RAND_MAX;
-		r = 1;//(float)rand() / (float)RAND_MAX;
-		g = 1;//(float)rand() / (float)RAND_MAX;
-		b = 1;//(float)rand() / (float)RAND_MAX;
-		a = 1;//(float)rand() / (float)RAND_MAX;
+		r = (float)rand() / (float)RAND_MAX;
+		g = (float)rand() / (float)RAND_MAX;
+		b = (float)rand() / (float)RAND_MAX;
+		a = (float)rand() / (float)RAND_MAX;
 		float size;
-		size = (float)rand() / (float)RAND_MAX * 0.05;
+		size = (float)rand() / (float)RAND_MAX * 0.01;
 		float sTime = (float)rand() / (float)RAND_MAX * 2.0;
 		float vx, vy, vz;//분수를 위한 벡터 x,y,z
 		vx = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
