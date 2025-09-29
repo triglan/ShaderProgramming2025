@@ -8,8 +8,10 @@ out vec4 v_Color;
 in float a_STime;
 in vec3 a_Vel;
 in float a_LifeTime;
+in float a_Mass;
 
 uniform float u_Time;
+uniform vec3 u_Force;
 
 const float c_PI = 3.141592;
 const vec2 c_G = vec2(0, -9.8);
@@ -26,8 +28,14 @@ void main()
 		float t = fract(newTime / lifeTime) * lifeTime;// t: 0~lifetime
 		float tt = t*t;
 
-		float x = a_Vel.x * t + 0.5 * c_G.x * tt;					
-		float y = a_Vel.y * t + 0.5 * c_G.y * tt;
+		float forceX = (u_Force.x + c_G.x)*a_Mass;
+		float forceY = (u_Force.y + c_G.y)*a_Mass;
+		
+		float aX = forceX / a_Mass;
+		float aY = forceY / a_Mass;
+
+		float x = a_Vel.x * t + 0.5 * aX * tt;					
+		float y = a_Vel.y * t + 0.5 * aY * tt;
 
 		newPosition.xy += vec2(x, y);
 		newAlpha = 1 - t/lifeTime; // t/lt는 0~1이 나올거임
