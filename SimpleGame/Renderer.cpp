@@ -395,8 +395,8 @@ void Renderer::GenerateParticles(int numParticle)
 		size = (float)rand() / (float)RAND_MAX * 0.01;
 		float sTime = (float)rand() / (float)RAND_MAX * 2.0;
 		float vx, vy, vz;//분수를 위한 벡터 x,y,z
-		vx = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
-		vy = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
+		vx = (((float)rand() / (float)RAND_MAX) * 2.f - 1.f) * 1.5f;	//-1~1
+		vy = ((((float)rand() / (float)RAND_MAX) * 2.f - 1.f) + 1.5f) * 1.5f;	//0.5~2.5
 		vz = 0.f;
 
 		int index = i * floatCountPerVertex * verticesCountPerParticle;	//v1
