@@ -7,6 +7,7 @@ in vec4 a_Color;
 out vec4 v_Color;
 in float a_STime;
 in vec3 a_Vel;
+in float a_LifeTime;
 
 uniform float u_Time;
 
@@ -15,7 +16,7 @@ const vec2 c_G = vec2(0, -9.8);
 
 void main()
 {
-	float lifeTime = 1.0;
+	float lifeTime = a_LifeTime;
 	float newAlpha = 1.0;
 	vec4 newPosition = vec4(a_Position, 1);
 	float newTime = u_Time - a_STime;
