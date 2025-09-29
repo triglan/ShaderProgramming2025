@@ -308,6 +308,9 @@ void Renderer::DrawTest()
 
 void Renderer::DrawParticle()
 {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	m_time += 0.00012;
 
 	//Program select
@@ -353,11 +356,13 @@ void Renderer::DrawParticle()
 		aVelLoc, 3, GL_FLOAT,
 		GL_FALSE, sizeof(float) * 12, (GLvoid*)(sizeof(float) * 9));
 
-	glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
+	//glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
 	glDisableVertexAttribArray(aPosLoc);
-
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glDisable(GL_BLEND);
 }
 
 void Renderer::GetGLPosition(float x, float y, float *newX, float *newY)
@@ -382,12 +387,12 @@ void Renderer::GenerateParticles(int numParticle)
 		y = 0;// ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
 		z = 0.f;
 		value = (float)rand() / (float)RAND_MAX;
-		r = (float)rand() / (float)RAND_MAX;
-		g = (float)rand() / (float)RAND_MAX;
-		b = (float)rand() / (float)RAND_MAX;
-		a = (float)rand() / (float)RAND_MAX;
+		r = 1;//(float)rand() / (float)RAND_MAX;
+		g = 1;//(float)rand() / (float)RAND_MAX;
+		b = 1;//(float)rand() / (float)RAND_MAX;
+		a = 1;//(float)rand() / (float)RAND_MAX;
 		float size;
-		size = (float)rand() / (float)RAND_MAX * 0.01;
+		size = (float)rand() / (float)RAND_MAX * 0.05;
 		float sTime = (float)rand() / (float)RAND_MAX * 2.0;
 		float vx, vy, vz;//분수를 위한 벡터 x,y,z
 		vx = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
