@@ -48,30 +48,37 @@ void raining(){
 }
 
 void sinParticle(){
+	vec4 centerC = vec4(1, 0, 0, 1);
+	vec4 borderC = vec4(1, 1, 1, 0);
+
 	float lifeTime = a_LifeTime;
 	float newTime = u_Time - a_STime;
 	vec4 newPosition = vec4(a_Position, 1);
 	float newAlpha = 1.0;
+	vec4 newColor = vec4(1,1,1,1);
 
 	if(newTime > 0){
 		float period = a_Period * 1;
-		float rep = 2;
+		float rep = 20;
 		float t = fract(newTime/lifeTime)*lifeTime;
 		float tt = t*t;
 
 		float x = 2 * t - 1;
 		float y = t * sin(rep * t * c_PI * period) * (a_Value - 0.5) * 2;
 		y *=  sin(fract(newTime/lifeTime)*c_PI);
-
+			
 		newPosition.xy += vec2(x, y);
-		//newAlpha = 1.25 - t/lifeTime;
+		newAlpha = 1 - t/lifeTime;
+
+		newColor = mix(centerC, borderC, abs(y*4));
 	}else{
-		newPosition.xy = vec2(1, 1);
+		newPosition.xy = vec2(0.9, 0.9);
 	}
 
 	
 	gl_Position = newPosition;
-	v_Color = vec4(a_Color.rgb, newAlpha);
+	//v_Color = vec4(a_Color.rgb, newAlpha);
+	v_Color = vec4(newColor.rgb, newAlpha);
 }
 
 void main()
