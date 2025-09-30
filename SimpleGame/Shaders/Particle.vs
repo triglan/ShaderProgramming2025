@@ -28,8 +28,8 @@ void main()
 		float t = fract(newTime / lifeTime) * lifeTime;// t: 0~lifetime
 		float tt = t*t;
 
-		float forceX = (u_Force.x + c_G.x)*a_Mass;
-		float forceY = (u_Force.y + c_G.y)*a_Mass;
+		float forceX = u_Force.x * 10 + c_G.x * a_Mass;
+		float forceY = u_Force.y + c_G.y * a_Mass;
 		
 		float aX = forceX / a_Mass;
 		float aY = forceY / a_Mass;
