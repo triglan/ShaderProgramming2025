@@ -1,7 +1,7 @@
 #version 330
 
 in vec3 a_Position;
-in float a_Radius;
+in float a_Value;
 in vec4 a_Color;
 
 out vec4 v_Color;
@@ -53,11 +53,12 @@ void sinParticle(){
 	float newAlpha = 1.0;
 
 	if(newTime > 0){
+		float rep = 16;
 		float t = fract(newTime);
 		float tt = t*t;
 
 		float x = 2 * t - 1;
-		float y = sin(2 * t * c_PI);
+		float y = t * sin(rep * t * c_PI) * (a_Value - 0.5) * 2;
 	
 		newPosition.xy += vec2(x, y);
 		newAlpha = 1.25 - t/lifeTime;

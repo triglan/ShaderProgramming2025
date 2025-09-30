@@ -325,7 +325,7 @@ void Renderer::DrawParticle()
 	glUniform3f(uForceLoc, 5, 0, 0);
 
 	int aPosLoc = glGetAttribLocation(shader, "a_Position");
-	int aRadiusLoc = glGetAttribLocation(shader, "a_Radius");
+	int aValueLoc = glGetAttribLocation(shader, "a_Value");
 	int aColLoc = glGetAttribLocation(shader, "a_Color");
 	int aSTimeLoc = glGetAttribLocation(shader, "a_STime");
 	int aVelLoc = glGetAttribLocation(shader, "a_Vel");
@@ -337,7 +337,7 @@ void Renderer::DrawParticle()
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBOParticle);
 
 	glEnableVertexAttribArray(aPosLoc);
-	glEnableVertexAttribArray(aRadiusLoc);
+	glEnableVertexAttribArray(aValueLoc);
 	glEnableVertexAttribArray(aColLoc);
 	glEnableVertexAttribArray(aSTimeLoc);
 	glEnableVertexAttribArray(aVelLoc);
@@ -349,7 +349,7 @@ void Renderer::DrawParticle()
 		GL_FALSE, sizeof(float) * stride, 0);
 
 	glVertexAttribPointer(
-		aRadiusLoc, 1, GL_FLOAT,
+		aValueLoc, 1, GL_FLOAT,
 		GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 3));
 
 	glVertexAttribPointer(
@@ -400,8 +400,8 @@ void Renderer::GenerateParticles(int numParticle)
 	for (int i = 0; i < numParticle; i++) {
 		float x, y, z, value, r, g, b, a;
 		x = 0;// ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
-		y = ((float)rand() / (float)RAND_MAX) * 0.5 - 0.25f;
-		//y = 0;// ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
+		//y = ((float)rand() / (float)RAND_MAX) * 0.5 - 0.25f;
+		y = 0;// ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
 		z = 0.f;
 		value = (float)rand() / (float)RAND_MAX;
 		r = (float)rand() / (float)RAND_MAX;
