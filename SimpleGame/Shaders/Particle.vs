@@ -9,6 +9,7 @@ in float a_STime;
 in vec3 a_Vel;
 in float a_LifeTime;
 in float a_Mass;
+in float a_Period;
 
 uniform float u_Time;
 uniform vec3 u_Force;
@@ -53,15 +54,17 @@ void sinParticle(){
 	float newAlpha = 1.0;
 
 	if(newTime > 0){
-		float rep = 16;
-		float t = fract(newTime);
+		float period = a_Period * 1;
+		float rep = 2;
+		float t = fract(newTime/lifeTime)*lifeTime;
 		float tt = t*t;
 
 		float x = 2 * t - 1;
-		float y = t * sin(rep * t * c_PI) * (a_Value - 0.5) * 2;
-	
+		float y = t * sin(rep * t * c_PI * period) * (a_Value - 0.5) * 2;
+		y *=  sin(fract(newTime/lifeTime)*c_PI);
+
 		newPosition.xy += vec2(x, y);
-		newAlpha = 1.25 - t/lifeTime;
+		//newAlpha = 1.25 - t/lifeTime;
 	}else{
 		newPosition.xy = vec2(1, 1);
 	}
