@@ -81,8 +81,34 @@ void sinParticle(){
 	v_Color = vec4(newColor.rgb, newAlpha);
 }
 
+void circleParticle(){
+	float lifeTime = a_LifeTime;
+	float newTime = u_Time - a_STime;
+	vec4 newPosition = vec4(a_Position, 1);
+	float newAlpha = 1.0;
+
+	if(newTime > 0){
+		float t = fract(newTime/lifeTime)*lifeTime;
+		float tt = t*t;
+
+		float x = sin(a_Value * 2 * c_PI);
+		float y = cos(a_Value * 2 * c_PI);
+
+		float newX = x + 0.5 * c_G.x*tt;
+		float newY = y + 0.5 * c_G.y*tt;
+
+		newPosition.xy += vec2(newX, newY);	//S_0
+		newAlpha = 1 - t/lifeTime;
+	}else{
+		newPosition.xy = vec2(0.9, 0.9);
+	}
+	gl_Position = newPosition;
+	v_Color = vec4(a_Color.rgb, newAlpha);
+}
+
 void main()
 {
 	//raining();
-	sinParticle();
+	//sinParticle();
+	circleParticle();
 }
