@@ -18,6 +18,7 @@ public:
 	void DrawSolidRect(float x, float y, float z, float size, float r, float g, float b, float a);
 	void DrawTest();
 	void DrawParticle();
+	void DrawGridMesh();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
@@ -52,6 +53,7 @@ private:
 	GLuint m_VBOParticleVertexCount = 0;
 
 	//Grid mesh
+	GLuint m_GridMeshShader = 0;
 	GLuint m_GridMeshVertexCount = 0;
 	GLuint m_GridMeshVBO = 0;
 };

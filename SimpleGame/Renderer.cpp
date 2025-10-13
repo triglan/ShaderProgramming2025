@@ -23,6 +23,9 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	//Create VBOs
 	CreateVertexBufferObjects();
 
+	//Create grid mesh
+	CreateGridMesh(2, 2);
+
 	GenerateParticles(2500);
 
 	if (m_SolidRectShader > 0 && m_VBORect > 0)
@@ -37,6 +40,7 @@ void Renderer::CompileAllShaderPrograms()
 	m_SolidRectShader = CompileShaders("./Shaders/SolidRect.vs", "./Shaders/SolidRect.fs");
 	m_TestShader = CompileShaders("./Shaders/Test.vs", "./Shaders/Test.fs");
 	m_ParticleShader = CompileShaders("./Shaders/Particle.vs", "./Shaders/Particle.fs");
+	m_GridMeshShader = CompileShaders("./Shaders/GridMesh.vs", "./Shaders/GridMesh.fs");
 }
 void Renderer::DeleteAllShaderPrograms()
 {
@@ -468,6 +472,25 @@ void Renderer::CreateGridMesh(int x, int y)
 
 	delete[] point;
 	delete[] vertices;
+}
+
+void Renderer::DrawGridMesh()
+{
+	//Program select
+	int shader = m_GridMeshShader;
+	glUseProgram(shader);
+
+	int attribPosition = glGetAttribLocation(shader, "a_Position");
+	glEnableVertexAttribArray(attribPosition);
+	glBindBuffer(GL_ARRAY_BUFFER, m_GridMeshVBO);
+	glVertexAttribPointer(attribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+
+	//glDrawArrays(GL_TRIANGLES, 0, m_GridMeshVertexCount);
+	glDrawArrays(GL_LINE_STRIP, 0, m_GridMeshVertexCount);
+
+	glDisableVertexAttribArray(attribPosition);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void Renderer::GetGLPosition(float x, float y, float *newX, float *newY)
