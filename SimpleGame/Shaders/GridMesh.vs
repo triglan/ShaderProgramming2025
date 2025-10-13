@@ -5,6 +5,8 @@ out vec4 v_Color;
 uniform float u_Time;
 
 const float c_PI = 3.141592;
+const float flagSize = 0.25;
+const float flagSpeed = 2;
 
 void main()
 {
@@ -14,9 +16,10 @@ void main()
 	float value = a_Position.x + 0.5; //0~1
 
 	float dX = 0;
-	float dY = value * sin(2 * value * c_PI + u_Time);//반대로 움직이고 싶으면 -u_Time
+	float dY = value * flagSize * sin(2 * value * c_PI + u_Time * flagSpeed);
+	//반대로 움직이고 싶으면 -u_Time, 빠르게 하고 싶으면 u_Time을 배수
 
-	newPosition += vec4(dX, dY/4, 0, 0);
+	newPosition += vec4(dX, dY, 0, 0);
 
 	gl_Position = newPosition;
 	v_Color = vec4(1,1,1,1);
