@@ -24,7 +24,7 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	CreateVertexBufferObjects();
 
 	//Create grid mesh
-	CreateGridMesh(2, 2);
+	CreateGridMesh(50, 50);
 
 	GenerateParticles(2500);
 
@@ -47,6 +47,7 @@ void Renderer::DeleteAllShaderPrograms()
 	glDeleteShader(m_SolidRectShader);
 	glDeleteShader(m_TestShader);
 	glDeleteShader(m_ParticleShader);
+	glDeleteShader(m_GridMeshShader);
 }
 
 bool Renderer::IsInitialized()
