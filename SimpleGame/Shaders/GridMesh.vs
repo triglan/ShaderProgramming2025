@@ -24,5 +24,7 @@ void main()
 	newPosition += vec4(dX, dY, 0, 0);
 
 	gl_Position = newPosition;
-	v_Color = vec4(1,1,1,1);
+
+	float newColor = (sin(2 * value * c_PI + u_Time * flagSpeed) + 1) / 2;	//0~1
+	v_Color = vec4(newColor);
 }
