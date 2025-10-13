@@ -477,6 +477,11 @@ void Renderer::CreateGridMesh(int x, int y)
 
 void Renderer::DrawGridMesh()
 {
+	m_time += 0.0006;
+
+	int uTimeLoc = glGetUniformLocation(m_TestShader, "u_Time"); // lec3 Ω√∞£ ºŒ¿Ã¥ı
+	glUniform1f(uTimeLoc, m_time);
+
 	//Program select
 	int shader = m_GridMeshShader;
 	glUseProgram(shader);
