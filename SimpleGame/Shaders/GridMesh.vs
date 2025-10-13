@@ -12,9 +12,9 @@ void main()
 	vec4 newPosition = vec4(a_Position, 1);
 
 	float value = a_Position.x + 0.5; //0~1
-	
+
 	float dX = 0;
-	float dY = sin(2 * value * c_PI + u_Time);
+	float dY = value * sin(2 * value * c_PI + u_Time);//반대로 움직이고 싶으면 -u_Time
 
 	newPosition += vec4(dX, dY/4, 0, 0);
 
