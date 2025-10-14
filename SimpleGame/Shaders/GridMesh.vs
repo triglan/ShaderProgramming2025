@@ -8,8 +8,7 @@ const float c_PI = 3.141592;
 const float flagSize = 0.25;
 const float flagSpeed = 4;
 
-void main()
-{
+void Flag(){
 	//a_Position.x -0.5 ~ 0.5
 	vec4 newPosition = vec4(a_Position, 1);
 
@@ -27,4 +26,28 @@ void main()
 
 	float newColor = (sin(2 * value * c_PI + u_Time * flagSpeed) + 1) / 2;	//0~1
 	v_Color = vec4(newColor);
+}
+
+void Wave()
+{
+	vec4 newPosition = vec4(a_Position, 1);
+	float dX = 0; 
+	float dY = 0;
+
+	vec2 pos = vec2(a_Position.xy);
+	vec2 cen = vec2(0, 0);
+	float d = distance(pos, cen); //°Å¸®
+	
+	newPosition += vec4(dX, dY, 0, 0);
+	gl_Position = newPosition;
+
+	float newColor = 1;
+
+	v_Color = vec4(d);
+}
+
+void main()
+{
+	Flag();
+	//Wave();
 }
