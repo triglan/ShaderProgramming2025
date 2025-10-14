@@ -38,18 +38,23 @@ void Wave()
 	vec2 cen = vec2(0, 0);
 	float d = distance(pos, cen); //°Å¸®
 	
-	newPosition += vec4(dX, dY, 0, 0);
-	gl_Position = newPosition;
 
 	float newColor = 1;
 
-	if(d<0.5){
+	/*if(d<0.5){
 		newColor = 1;
 	}else{
 		newColor = 0;
-	}
+	}*/
 
-	v_Color = vec4(newColor);
+	float value = 0.5 - d;
+	value = clamp(value, 0, 1);
+	value = ceil(value);
+	
+	newPosition += vec4(dX, dY, 0, 0);
+	gl_Position = newPosition;
+
+	v_Color = vec4(value);
 }
 
 void main()
