@@ -24,7 +24,7 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	CreateVertexBufferObjects();
 
 	//Create grid mesh
-	CreateGridMesh(50, 50);
+	CreateGridMesh(100, 100);
 
 	GenerateParticles(2500);
 
@@ -489,7 +489,7 @@ void Renderer::CreateGridMesh(int x, int y)
 
 void Renderer::DrawGridMesh()
 {
-	m_time += 0.0006;
+	m_time += 0.0036;
 
 	//Program select
 	int shader = m_GridMeshShader;

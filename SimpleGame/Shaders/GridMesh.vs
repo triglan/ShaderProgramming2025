@@ -38,7 +38,7 @@ void Wave()
 	vec2 cen = vec2(0, 0);
 	float d = distance(pos, cen); //°Å¸®
 	
-	float newColor = sin(d*4*c_PI*10);
+	float newColor = sin(d*4*c_PI*10 - u_Time);
 
 	newPosition += vec4(dX, dY, 0, 0);
 	gl_Position = newPosition;
