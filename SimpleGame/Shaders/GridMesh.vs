@@ -43,11 +43,17 @@ void Wave()
 
 	float newColor = 1;
 
-	v_Color = vec4(d);
+	if(d<0.5){
+		newColor = 1;
+	}else{
+		newColor = 0;
+	}
+
+	v_Color = vec4(newColor);
 }
 
 void main()
 {
-	Flag();
-	//Wave();
+	//Flag();
+	Wave();
 }
