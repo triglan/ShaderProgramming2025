@@ -38,23 +38,12 @@ void Wave()
 	vec2 cen = vec2(0, 0);
 	float d = distance(pos, cen); //거리
 	
+	float newColor = sin(d*4*c_PI*10);
 
-	float newColor = 1;
-
-	/*if(d<0.5){
-		newColor = 1;
-	}else{
-		newColor = 0;
-	}*/
-
-	float value = 0.5 - d;
-	value = clamp(value, 0, 1);
-	value = ceil(value);
-	
 	newPosition += vec4(dX, dY, 0, 0);
 	gl_Position = newPosition;
 
-	v_Color = vec4(value);
+	v_Color = vec4(newColor);
 }
 
 void main()
@@ -62,3 +51,16 @@ void main()
 	//Flag();
 	Wave();
 }
+
+
+//둥근원만드는 2가지 방법(픽셀단위로)
+	/*if(d<0.5){
+		newColor = 1;
+	}else{
+		newColor = 0;
+	}*/
+
+	/*float value = 0.5 - d;
+	value = clamp(value, 0, 1);
+	value = ceil(value);*/
+	
