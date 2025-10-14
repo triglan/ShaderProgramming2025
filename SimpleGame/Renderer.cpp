@@ -489,7 +489,7 @@ void Renderer::CreateGridMesh(int x, int y)
 
 void Renderer::DrawGridMesh()
 {
-	m_time += 0.0036;
+	m_time += 0.0006;
 
 	//Program select
 	int shader = m_GridMeshShader;
