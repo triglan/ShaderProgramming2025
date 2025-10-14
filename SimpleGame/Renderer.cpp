@@ -41,6 +41,7 @@ void Renderer::CompileAllShaderPrograms()
 	m_TestShader = CompileShaders("./Shaders/Test.vs", "./Shaders/Test.fs");
 	m_ParticleShader = CompileShaders("./Shaders/Particle.vs", "./Shaders/Particle.fs");
 	m_GridMeshShader = CompileShaders("./Shaders/GridMesh.vs", "./Shaders/GridMesh.fs");
+	m_FullScreenShader = CompileShaders("./Shaders/FullScreen.vs", "./Shaders/FullScreen.fs");
 }
 void Renderer::DeleteAllShaderPrograms()
 {
@@ -48,6 +49,7 @@ void Renderer::DeleteAllShaderPrograms()
 	glDeleteShader(m_TestShader);
 	glDeleteShader(m_ParticleShader);
 	glDeleteShader(m_GridMeshShader);
+	glDeleteShader(m_FullScreenShader);
 }
 
 bool Renderer::IsInitialized()
@@ -127,6 +129,16 @@ void Renderer::CreateVertexBufferObjects()
 	// gpt : 현재 선택된 버퍼, 방금 받은 택배 -> 현재 자업 중인 상자
 	//GL ARRAY BUFFER의 방에서 testID 상자로 일하는 걸로 말씀하시는 거 같다.
 	glBufferData(GL_ARRAY_BUFFER, sizeof(testColor), testColor, GL_STATIC_DRAW);	//test 데이터로 그리는 것 
+
+	float fullRect[]
+		=
+	{
+		-1, -1, 0, 1, 1, 0, -1, 1, 0,
+		-1, -1, 0, 1, -1, 0, 1, 1, 0
+	};
+	glGenBuffers(1, &m_VBOFullScreen);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOFullScreen);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(fullRect), fullRect, GL_STATIC_DRAW);
 
 }
 
@@ -479,12 +491,12 @@ void Renderer::DrawGridMesh()
 {
 	m_time += 0.0006;
 
-	int uTimeLoc = glGetUniformLocation(m_TestShader, "u_Time"); // lec3 시간 셰이더
-	glUniform1f(uTimeLoc, m_time);
-
 	//Program select
 	int shader = m_GridMeshShader;
 	glUseProgram(shader);
+
+	int uTimeLoc = glGetUniformLocation(shader, "u_Time"); // lec3 시간 셰이더
+	glUniform1f(uTimeLoc, m_time);
 
 	int attribPosition = glGetAttribLocation(shader, "a_Position");
 	glEnableVertexAttribArray(attribPosition);
@@ -497,6 +509,31 @@ void Renderer::DrawGridMesh()
 	glDisableVertexAttribArray(attribPosition);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void Renderer::DrawFullScreenColor(float r, float g, float b, float a)
+{
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC0_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	int shader = m_FullScreenShader;
+	//Program select
+	glUseProgram(shader);
+
+	glUniform4f(glGetUniformLocation(shader, "u_Color"), r, g, b, a);
+
+	int attribPosition = glGetAttribLocation(shader, "a_Position");
+	glEnableVertexAttribArray(attribPosition);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOFullScreen);
+	glVertexAttribPointer(attribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	glDisableVertexAttribArray(attribPosition);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glDisable(GL_BLEND);
 }
 
 void Renderer::GetGLPosition(float x, float y, float *newX, float *newY)

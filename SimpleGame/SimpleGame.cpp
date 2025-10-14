@@ -25,7 +25,8 @@ void RenderScene(void)
 		g_bNeedReloadShaderPrograms = false;
 	}
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	g_Renderer->DrawFullScreenColor(0, 1, 0, 0.5);
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
 	// Renderer Test
@@ -65,11 +66,12 @@ void SpecialKeyInput(int key, int x, int y)
 
 int main(int argc, char **argv)
 {
+	int winsize = 800;
 	// Initialize GL things
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(1200, 100);
-	glutInitWindowSize(500, 500);
+	glutInitWindowPosition(1700 - winsize, 0);
+	glutInitWindowSize(winsize, winsize);
 	glutCreateWindow("Game Software Engineering KPU");
 
 	glewInit();
