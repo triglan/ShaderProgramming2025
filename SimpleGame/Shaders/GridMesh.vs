@@ -4,7 +4,7 @@ in vec3 a_Position;
 out vec4 v_Color;
 uniform float u_Time;
 
-const vec2 c_Points[3] = vec2[](vec2(0, 0), vec2(0.5, 0), vec2(-0.5, -0.5));
+const vec4 c_Points[3] = vec4[](vec4(0, 0, 2, 0), vec4(0.5, 0, 3, 0), vec4(-0.5, -0.5, 4, 0));
 const float c_PI = 3.141592;
 const float flagSize = 0.25;
 const float flagSpeed = 4;
@@ -55,11 +55,14 @@ void RainDrop()
 	float dY = 0;
 
 	vec2 pos = vec2(a_Position.xy);
-	float  newColor = 0;
+	float newColor = 0;
+	float newTime = u_Time * 10;
 
 	for(int i=0; i<3; i++)
 	{
-		vec2 cen = c_Points[i];
+		if(newTime < c_Points[i].z) break;
+
+		vec2 cen = c_Points[i].xy;
 		float d = distance(pos, cen); //°Å¸®
 		float v = 2 * clamp(0.5 - d, 0, 1);
 		newColor += v * sin(d*4*c_PI*10 - u_Time * 100);
