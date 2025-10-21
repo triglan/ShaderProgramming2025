@@ -59,16 +59,18 @@ void RainDrop()
 
 	for(int i=0; i<3; i++)
 	{
-		float newTime = u_Time * 2 - c_Points[i].z;
-		float lifeTime = c_Points[i].w;
+		float sTime = c_Points[i].z;
+		float lTime = c_Points[i].w;
+		float newTime = u_Time * 2 - sTime;
 		if(newTime > 0){
-			float t = newTime;
-			float tt = t * t;
+			float baseTime = fract(newTime / c_Points[i].w);
+			float t = baseTime * lTime;
+			float range = lTime / 10;
 
 			vec2 cen = c_Points[i].xy;
 			float d = distance(pos, cen); //°Å¸®
-			float v = 2 * clamp(tt - d, 0, 1);
-			newColor +=  v * sin(d*4*c_PI*10 - u_Time * 10);
+			float v = 2 * clamp(range - d, 0, 1);
+			newColor +=  v * sin(d*4*c_PI*10 - u_Time * 12);
 		}
 	}
 
