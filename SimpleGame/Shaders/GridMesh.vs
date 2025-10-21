@@ -55,11 +55,16 @@ void RainDrop()
 	float dY = 0;
 
 	vec2 pos = vec2(a_Position.xy);
-	vec2 cen = c_Points[1];
-	float d = distance(pos, cen); //거리
-	float v = clamp(0.5 - d, 0, 1);
-	
-	float newColor = v * sin(d*4*c_PI*10 - u_Time * 10);
+	float  newColor = 0;
+
+	for(int i=0; i<2; i++)
+	{
+		vec2 cen = c_Points[i];
+		float d = distance(pos, cen); //거리
+		float v = 2 * clamp(0.5 - d, 0, 1);
+		newColor += v * sin(d*4*c_PI*10 - u_Time * 100);
+	}
+
 
 	newPosition += vec4(dX, dY, 0, 0);
 	gl_Position = newPosition;
