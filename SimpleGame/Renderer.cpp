@@ -26,7 +26,21 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	//Create grid mesh
 	CreateGridMesh(1000, 1000);
 
+	//Create Particles
 	GenerateParticles(2500);
+
+	//Fill Points
+	int index = 0;
+	for (int i = 0; i < 100; i++) {
+		float x = 2 * ((float)rand() / RAND_MAX) - 1;
+		float y = 2 * ((float)rand() / RAND_MAX) - 1;
+		float st = 10 * ((float)rand() / RAND_MAX);
+		float lt = ((float)rand() / RAND_MAX);
+		m_Points[index] = x; index++;
+		m_Points[index] = y; index++;
+		m_Points[index] = st; index++;
+		m_Points[index] = lt; index++;
+	}
 
 	if (m_SolidRectShader > 0 && m_VBORect > 0)
 	{
@@ -497,12 +511,21 @@ void Renderer::DrawGridMesh()
 {
 	m_time += 0.006;
 
+	float points[12] =
+	{ 
+		0,0,2,2,
+		0.5,0,3,3
+		-0.5,0,4,4
+	};
 	//Program select
 	int shader = m_GridMeshShader;
 	glUseProgram(shader);
 
 	int uTimeLoc = glGetUniformLocation(shader, "u_Time"); // lec3 시간 셰이더
 	glUniform1f(uTimeLoc, m_time);
+
+	int uPointsLoc = glGetUniformLocation(shader, "u_Points");//Location인거 주의하라고 하심
+	glUniform4fv(uPointsLoc, 100, m_Points);
 
 	int attribPosition = glGetAttribLocation(shader, "a_Position");
 	glEnableVertexAttribArray(attribPosition);
