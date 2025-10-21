@@ -406,10 +406,16 @@ void Renderer::DrawParticle()
 
 void Renderer::CreateGridMesh(int x, int y)
 {
-	float basePosX = -1.f;
-	float basePosY = -1.f;
-	float targetPosX = 1.f;
-	float targetPosY = 1.f;
+	//다중 물결
+	float basePosX =	-1.f;
+	float basePosY =	-1.f;
+	float targetPosX =	 1.f;
+	float targetPosY =	 1.f;
+	//Flag
+	//float basePosX =	-0.5f;
+	//float basePosY =	-0.5f;
+	//float targetPosX =	 0.5f;
+	//float targetPosY =	 0.5f;
 
 	int pointCountX = x;
 	int pointCountY = y;
