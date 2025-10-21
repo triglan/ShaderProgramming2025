@@ -65,7 +65,7 @@ void RainDrop()
 		if(newTime > 0){
 			float baseTime = fract(newTime / c_Points[i].w);
 			float t = baseTime * lTime;
-			float range = lTime / 10;
+			float range = baseTime * lTime / 10;
 
 			vec2 cen = c_Points[i].xy;
 			float d = distance(pos, cen); //°Å¸®
