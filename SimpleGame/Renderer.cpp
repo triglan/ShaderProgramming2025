@@ -24,7 +24,7 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	CreateVertexBufferObjects();
 
 	//Create grid mesh
-	CreateGridMesh(100, 100);
+	CreateGridMesh(1000, 1000);
 
 	GenerateParticles(2500);
 
@@ -406,10 +406,10 @@ void Renderer::DrawParticle()
 
 void Renderer::CreateGridMesh(int x, int y)
 {
-	float basePosX = -0.5f;
-	float basePosY = -0.5f;
-	float targetPosX = 0.5f;
-	float targetPosY = 0.5f;
+	float basePosX = -1.f;
+	float basePosY = -1.f;
+	float targetPosX = 1.f;
+	float targetPosY = 1.f;
 
 	int pointCountX = x;
 	int pointCountY = y;
@@ -489,7 +489,7 @@ void Renderer::CreateGridMesh(int x, int y)
 
 void Renderer::DrawGridMesh()
 {
-	m_time += 0.0006;
+	m_time += 0.006;
 
 	//Program select
 	int shader = m_GridMeshShader;
