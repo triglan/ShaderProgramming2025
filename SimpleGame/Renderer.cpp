@@ -514,7 +514,7 @@ void Renderer::DrawGridMesh()
 void Renderer::DrawFullScreenColor(float r, float g, float b, float a)
 {
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC0_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	int shader = m_FullScreenShader;
 	//Program select

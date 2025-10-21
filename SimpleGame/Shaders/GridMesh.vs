@@ -49,8 +49,8 @@ void Wave()
 
 void main()
 {
-	//Flag();
-	Wave();
+	Flag();
+	//Wave();
 }
 
 
