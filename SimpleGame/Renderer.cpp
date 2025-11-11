@@ -432,9 +432,13 @@ void Renderer::DrawParticle()
 void Renderer::DrawFS() 
 {
 	int shader = m_FSShader;
+	m_time += 0.00012;
 
 	//Program select
 	glUseProgram(shader);
+
+	int uTimeLoc = glGetUniformLocation(m_TestShader, "u_Time"); // lec3 Ω√∞£ ºŒ¿Ã¥ı
+	glUniform1f(uTimeLoc, m_time);
 
 	int attribPosition = glGetAttribLocation(shader, "a_Position");
 	glEnableVertexAttribArray(attribPosition);
