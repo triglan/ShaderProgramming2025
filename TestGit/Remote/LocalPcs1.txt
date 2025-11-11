@@ -1,0 +1,154 @@
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs (ma
+$ git clone ../GitRemote/ Local1
+Cloning into 'Local1'...
+warning: You appear to have cloned an empty repository.
+done.
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs (main)
+$ dir
+Local1
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs (main)
+$ git clone ../GitRemote/ Local2
+Cloning into 'Local2'...
+warning: You appear to have cloned an empty repository.
+done.
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs (main)
+$ cd Local1/
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ vim a.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git add a.txt
+warning: in the working copy of 'a.txt', LF will be replaced by CRLF the next time Git tou
+ches it
+g
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git commit -m "add a.txt"
+[master (root-commit) 1321967] add a.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 a.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git branch
+* master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git branch --all
+* master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git push
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 205 bytes | 205.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemote/
+ * [new branch]      master -> master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git branch -a
+* master
+  remotes/origin/master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ remotes라는 얘가 생겼다
+bash: remotes라는: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ 푸시 전까진 어떤 브랜치 트리도 생기지 않아서 보이지 않았다
+bash: 푸시: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ Local2로 넘어감
+bash: Local2로: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ vim b.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git add b.txt
+warning: in the working copy of 'b.txt', LF will be replaced by CRLF the next time Git tou
+ches it
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   b.txt
+
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git commit -m "b.txt"
+[master 96fc918] b.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 b.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 259 bytes | 259.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemote/
+   1321967..96fc918  master -> master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ vim d.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git add .
+warning: in the working copy of 'd.txt', LF will be replaced by CRLF the next time Git tou
+ches it
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git commit -m "add d.txt"
+[master fcf791c] add d.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 d.txt
+g
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 287 bytes | 287.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemote/
+   96fc918..fcf791c  master -> master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ vim a.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git add .
+warning: in the working copy of 'a.txt', LF will be replaced by CRLF the next time Git tou
+ches it
+i
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git commit -m "modi a.txt"
+[master acfdf00] modi a.txt
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 292 bytes | 292.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemote/
+   fcf791c..acfdf00  master -> master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local1 (master)
+$

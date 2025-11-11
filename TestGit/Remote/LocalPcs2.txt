@@ -1,0 +1,293 @@
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/RcalPcs/Local2 (master)
+$ git branch
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git branch -a
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ -a == --all
+bash: -a: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git push
+error: src refspec refs/heads/master does not match any
+error: failed to push some refs to 'C:/GitHub/ShaderProgramming2025/Test
+Git/Remote/LocalPcs/../GitRemote/'
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git branch
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git fetch
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 185 bytes | 18.00 KiB/s, done.
+From C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemot
+e
+ * [new branch]      master     -> origin/master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ dir
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git branch -a
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git merge remotes/origin.master
+merge: remotes/origin.master - not something we can merge
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git log
+fatal: your current branch 'master' does not have any commits yet
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git push
+error: src refspec refs/heads/master does not match any
+error: failed to push some refs to 'C:/GitHub/ShaderProgramming2025/Test
+Git/Remote/LocalPcs/../GitRemote/'
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git branch --all
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ vim b.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git add b.txt
+warning: in the working copy of 'b.txt', LF will be replaced by CRLF the
+ next time Git touches it
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git commit -m "add b.txt"
+[master (root-commit) c2c8c37] add b.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 b.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git push
+To C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemote/
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'C:/GitHub/ShaderProgramming2025/Test
+Git/Remote/LocalPcs/../GitRemote/'
+hint: Updates were rejected because the remote contains work that you do
+ not
+hint: have locally. This is usually caused by another repository pushing
+ to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for detail
+s.
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git log
+commit c2c8c37db493ed0964a08d13afbce8c2727a2d22 (HEAD -> master)
+Author: triglan <glanb4277@gmail.com>
+Date:   Mon Nov 10 16:51:56 2025 +0900
+
+    add b.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ vim c.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git add .
+warning: in the working copy of 'c.txt', LF will be replaced by CRLF the
+ next time Git touches it
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git commit -m "add c.txt"
+[master 1e860fa] add c.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 c.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git push
+To C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemote/
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'C:/GitHub/ShaderProgramming2025/Test
+Git/Remote/LocalPcs/../GitRemote/'
+hint: Updates were rejected because the remote contains work that you do
+ not
+hint: have locally. This is usually caused by another repository pushing
+ to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for detail
+s.
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ GitRemote에 변화가 있었네 푸시 못해라고 에러를 띄운다. 패스트포워드가 일어나도록 바꾸라고 한다
+bash: GitRemote에: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git fetch
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 239 bytes | 9.00 KiB/s, done.
+From C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemot
+e
+   1321967..96fc918  master     -> origin/master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ dir
+b.txt  c.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git diff remotes/origin/master
+diff --git a/a.txt b/a.txt
+deleted file mode 100644
+index 7898192..0000000
+--- a/a.txt
++++ /dev/null
+@@ -1 +0,0 @@
+-a
+diff --git a/c.txt b/c.txt
+new file mode 100644
+index 0000000..ae93045
+--- /dev/null
++++ b/c.txt
+@@ -0,0 +1 @@
++c1
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git merge remotes/origin/master
+fatal: refusing to merge unrelated histories
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ 머지가 성공한다매
+bash: 머지가: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ 햣 ㅣㅐㅎ
+bash: 햣: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git log
+commit 1e860fa5eb2a53876bd52fbe90cc033cece8839f (HEAD -> master)
+Author: triglan <glanb4277@gmail.com>
+Date:   Mon Nov 10 16:52:35 2025 +0900
+
+    add c.txt
+
+commit c2c8c37db493ed0964a08d13afbce8c2727a2d22
+Author: triglan <glanb4277@gmail.com>
+Date:   Mon Nov 10 16:51:56 2025 +0900
+
+    add b.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ vim e.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git add .
+warning: in the working copy of 'e.txt', LF will be replaced by CRLF the
+ next time Git touches it
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git commit -m "add e.txt"
+[master 5f57dbb] add e.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 e.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git pull
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 267 bytes | 16.00 KiB/s, done.
+From C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemot
+e
+   96fc918..fcf791c  master     -> origin/master
+fatal: refusing to merge unrelated histories
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ dir
+b.txt  c.txt  e.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git diff
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git -a
+unknown option: -a
+usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>
+]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-pat
+h]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [-
+-no-lazy-fetch]
+           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path
+>]
+           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name
+>=<envvar>]
+           <command> [<args>]
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ 안좋은 케이스를 한번 만들어 보죠
+bash: 안좋은: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ vim a.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git add .
+warning: in the working copy of 'a.txt', LF will be replaced by CRLF the
+ next time Git touches it
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git commit -m "modi a.txt"
+[master 7192c5d] modi a.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 a.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git push
+To C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemote/
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'C:/GitHub/ShaderProgramming2025/Test
+Git/Remote/LocalPcs/../GitRemote/'
+hint: Updates were rejected because the remote contains work that you do
+ not
+hint: have locally. This is usually caused by another repository pushing
+ to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for detail
+s.
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 272 bytes | 20.00 KiB/s, done.
+From C:/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/../GitRemot
+e
+   fcf791c..acfdf00  master     -> origin/master
+fatal: refusing to merge unrelated histories
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ conflict가떠야한다
+bash: conflict가떠야한다: command not found
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$ vim a.txt
+
+이규원@DESKTOP-1IQUCAN MINGW64 /c/GitHub/ShaderProgramming2025/TestGit/Remote/LocalPcs/Local2 (master)
+$
