@@ -9,8 +9,8 @@ const float c_PI = 3.141592;
 void main()
 {
 	vec4 newColor = vec4(0);
-	float xValue= 1 - pow(abs(sin(x_UV.x * 2 * c_PI * 4)), 0.5);
+	float xValue= 1 - pow(abs(sin(v_UV.x * 2 * c_PI * 4)), 0.5);
+	
 	newColor = vec4(xValue);
-
 	FragColor = newColor;
 }
