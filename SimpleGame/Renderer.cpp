@@ -156,6 +156,15 @@ void Renderer::CreateVertexBufferObjects()
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBOFullScreen);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(fullRect), fullRect, GL_STATIC_DRAW);
 
+	float fullRectFS[]
+		=
+	{
+		-1, -1, 0, 1, 1, 0, -1, 1, 0,
+		-1, -1, 0, 1, -1, 0, 1, 1, 0
+	};
+	glGenBuffers(1, &m_VBOFS);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOFS);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(fullRectFS), fullRectFS, GL_STATIC_DRAW);
 }
 
 void Renderer::AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType)
@@ -420,7 +429,8 @@ void Renderer::DrawParticle()
 	glDisable(GL_BLEND);
 }
 
-void Renderer::DrawFS() {
+void Renderer::DrawFS() 
+{
 	int shader = m_FSShader;
 
 	//Program select
