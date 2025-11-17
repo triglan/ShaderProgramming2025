@@ -15,12 +15,6 @@ void main()
     float dx = 0;
     float dy = 0;
     newUV += vec2(dx, dy);
-
     vec4 sampledColor = texture(u_RGBTexture, newUV);
-    sampledColor += texture(u_RGBTexture, vec2(newUV.x - 0.02, newUV.y));
-    sampledColor += texture(u_RGBTexture, vec2(newUV.x - 0.04, newUV.y));
-    sampledColor += texture(u_RGBTexture, vec2(newUV.x - 0.06, newUV.y));
-    sampledColor /= 4;
-
     FragColor = sampledColor;
 }
