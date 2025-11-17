@@ -13,7 +13,7 @@ void main()
 {
     vec2 newUV = v_UV;
     float dx = 0;
-    float dy = 0;
+    float dy = u_Time;
     newUV += vec2(dx, dy);
 
     vec4 sampledColor = texture(u_RGBTexture, newUV);
