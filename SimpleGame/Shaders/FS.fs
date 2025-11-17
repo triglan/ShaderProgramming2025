@@ -11,5 +11,12 @@ const float c_PI = 3.141592;
 
 void main()
 {
-    FragColor = vec4(v_UV, 0, 1);
+    vec2 newUV = v_UV;
+    float dx = 0;
+    float dy = 0;
+    newUV += vec2(dx, dy);
+
+    vec4 sampledColor = texture(u_RGBTexture, newUV);
+
+    FragColor = sampledColor;
 }
