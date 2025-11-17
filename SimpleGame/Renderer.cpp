@@ -435,7 +435,7 @@ void Renderer::DrawParticle()
 void Renderer::DrawFS() 
 {
 	int shader = m_FSShader;
-	m_time += 0.00012;
+	m_time += 0.0006;
 
 	//Program select
 	glUseProgram(shader);
