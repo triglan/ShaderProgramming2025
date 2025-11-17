@@ -20,7 +20,7 @@ void main()
     sampledColor += texture(u_RGBTexture, vec2(newUV.x - 0.02, newUV.y));
     sampledColor += texture(u_RGBTexture, vec2(newUV.x - 0.04, newUV.y));
     sampledColor += texture(u_RGBTexture, vec2(newUV.x - 0.06, newUV.y));
-
+    sampledColor /= 4;
 
     FragColor = sampledColor;
 }
