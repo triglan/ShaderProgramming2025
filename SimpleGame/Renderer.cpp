@@ -440,8 +440,13 @@ void Renderer::DrawFS()
 	//Program select
 	glUseProgram(shader);
 
-	int uTimeLoc = glGetUniformLocation(m_TestShader, "u_Time"); // lec3 Ω√∞£ ºŒ¿Ã¥ı
+	int uTimeLoc = glGetUniformLocation(shader, "u_Time"); // lec3 Ω√∞£ ºŒ¿Ã¥ı
 	glUniform1f(uTimeLoc, m_time);
+
+	int uTextureLoc = glGetUniformLocation(shader, "u_RGBTexture"); // lec3 Ω√∞£ ºŒ¿Ã¥ı
+	glUniform1i(uTextureLoc, 0);
+
+	glBindTexture(GL_TEXTURE_2D, m_RGBTexture);
 
 	int attribPosition = glGetAttribLocation(shader, "a_Position");
 	glEnableVertexAttribArray(attribPosition);
