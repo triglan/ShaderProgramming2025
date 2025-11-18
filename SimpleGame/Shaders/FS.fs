@@ -23,15 +23,29 @@ void Circles(){
     vec2 center = vec2(0.5, 0.5);
     float d = distance(newUV, center);
     
-    float value = sin(d*4*c_PI * 5 + u_Time);
+    float value = sin(d*4*c_PI * 5 - u_Time);
     vec4 newColor = vec4(value);
+    FragColor = newColor;
+}
 
+void Flag(){
+    vec2 newUV = v_UV;  //0~1 
+    vec4 newColor = vec4(0);
+
+    float width = 0.2;
+    float sinValue = 0.2 * sin(v_UV.x * 2 * c_PI);
+
+    if(v_UV.y < sinValue + width){
+        newColor = vec4(1);
+    }
 
     FragColor = newColor;
+
 }
 
 void main()
 {
     //Test();
-    Circles();
+    //Circles();
+    Flag();
 }
