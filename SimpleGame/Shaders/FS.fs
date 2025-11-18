@@ -38,6 +38,8 @@ void Flag(){
 
     if(newUV.y < sinValue + width && newUV.y > sinValue - width){
         newColor = vec4(1);
+    }else{
+        discard;
     }
 
     FragColor = newColor;
