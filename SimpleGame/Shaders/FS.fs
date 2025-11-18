@@ -33,8 +33,8 @@ void Flag(){
     vec2 newUV = vec2(v_UV.x, 1-v_UV.y-0.5);  //0~1 
     vec4 newColor = vec4(0);
 
-    float width = 0.2;
-    float sinValue = v_UV.x * 0.2 * sin(newUV.x * 2 * c_PI + u_Time * 2);
+    float width = 0.2 * (1 - newUV.x);
+    float sinValue = newUV.x * 0.2 * sin(newUV.x * 2 * c_PI + u_Time * 2);
 
     if(newUV.y < sinValue + width && newUV.y > sinValue - width){
         newColor = vec4(1);
