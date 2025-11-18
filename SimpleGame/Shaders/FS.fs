@@ -70,10 +70,21 @@ void Q1(){
     FragColor = newColor;
 }
 
+void Q2(){
+    vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1 left top (0,0)
+    float x = fract(newUV.x * 3);  //0~1, 0~1, 0~1
+    float y = newUV.y; // 0~1~0
+
+
+    vec4 newColor = texture(u_RGBTexture, vec2(x,y));
+    FragColor = newColor;
+}
+
 void main()
 {
     //Test();
     //Circles();
     //Flag();
-    Q1();
+    //Q1();
+    Q2();
 }
