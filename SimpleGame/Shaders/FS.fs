@@ -88,6 +88,24 @@ void Q2(){
     FragColor = newColor;
 }
 
+void Q3(){
+    vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1 left top (0,0)
+
+    float x = 0;
+    float y = 0;
+    if(newUV.y < 0.5){
+    x = fract(newUV.x * 2) + 0.5;  //0~1, 0~1, 0~1
+    //float y = (floor(newUV.x*3))/3 + v_UV.y / 3; // 0~1~0
+    y = fract(newUV.y * 2);
+    }else{
+        x = fract(newUV.x * 2);
+        y = fract(newUV.y * 2);
+    }
+
+    vec4 newColor = texture(u_RGBTexture, vec2(x,y));
+    FragColor = newColor;
+}
+
 void main()
 {
     //Test();
@@ -95,4 +113,5 @@ void main()
     //Flag();
     //Q1();
     Q2();
+    //Q3();
 }
