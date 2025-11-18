@@ -29,13 +29,15 @@ void Circles(){
 }
 
 void Flag(){
-    vec2 newUV = v_UV;  //0~1 
+    //왼쪽 아래를 0,0으로 바꾸기
+    vec2 newUV = vec2(v_UV.x, 1-v_UV.y);  //0~1 
     vec4 newColor = vec4(0);
 
-    float width = 0.2;
-    float sinValue = 0.2 * sin(v_UV.x * 2 * c_PI);
 
-    if(v_UV.y < sinValue + width){
+    float width = 0.2;
+    float sinValue = 0.2 * sin(newUV.x * 2 * c_PI);
+
+    if(newUV.y < sinValue + width){
         newColor = vec4(1);
     }
 
