@@ -51,15 +51,19 @@ void Q1(){
     float x = newUV.y;  //0~1
     float y = 1 - newUV.x; // 0~1~0
 
-    float three = 0.333333333333333;
-    float six = 0.666666666666;
+    float three = 1.0/3.0;
+    float six = 2.0/3.0;
     if(y < three && x > three && x < six){
-        x = newUV.x - 0.33;
-        y = newUV.y - 0.331;
+        x = newUV.x - three;
+        y = newUV.y - three;
     }
     if(y > three && y < six && x > three && x < six){
         x = newUV.x;
         y = newUV.y;
+    }
+    if(y > six && x > three && x < six){
+        x = newUV.x + three;
+        y = newUV.y + three;
     }
 
     vec4 newColor = texture(u_RGBTexture, vec2(x,y));
