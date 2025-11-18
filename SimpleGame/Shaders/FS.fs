@@ -48,8 +48,19 @@ void Flag(){
 
 void Q1(){
     vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1 left top (0,0)
-    float x = newUV.x;  //0~1
-    float y = 1 - abs(2 * (newUV.y - 0.5)); // 0~1~0
+    float x = newUV.y;  //0~1
+    float y = 1 - newUV.x; // 0~1~0
+
+    float three = 0.333333333333333;
+    float six = 0.666666666666;
+    if(y < three && x > three && x < six){
+        x = newUV.x - 0.33;
+        y = newUV.y - 0.331;
+    }
+    if(y > three && y < six && x > three && x < six){
+        x = newUV.x;
+        y = newUV.y;
+    }
 
     vec4 newColor = texture(u_RGBTexture, vec2(x,y));
     FragColor = newColor;
