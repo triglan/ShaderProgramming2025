@@ -47,9 +47,11 @@ void Flag(){
 }
 
 void Q1(){
-    vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1
-    vec4 newColor = texture(u_RGBTexture, newUV);
+    vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1 left top (0,0)
+    float x = newUV.x;  //0~1
+    float y = 1 - abs(2 * (newUV.y - 0.5)); // 0~1~0
 
+    vec4 newColor = texture(u_RGBTexture, vec2(x,y));
     FragColor = newColor;
 }
 
