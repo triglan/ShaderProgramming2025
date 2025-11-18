@@ -7,8 +7,9 @@ uniform float u_Time;
 uniform vec4 u_Points[MAX_POINTS];
 
 const float c_PI = 3.141592;
-const float flagSize = 0.25;
-const float flagSpeed = 4;
+const float flagSize = 0.5;
+const float flagSpeed = 10;
+out vec2 v_UV;
 
 void Flag(){
 	//a_Position.x -0.5 ~ 0.5
@@ -16,10 +17,10 @@ void Flag(){
 
 	float value = a_Position.x + 0.5; //0~1
 
-	newPosition.y = newPosition.y * (1 - value);
+	//newPosition.y = newPosition.y * (1 - value);
 
 	float dX = 0;
-	float dY = value * flagSize * sin(2 * value * c_PI + u_Time * flagSpeed);
+	float dY = value * flagSize * sin(2 * value * c_PI - u_Time * flagSpeed);
 	//반대로 움직이고 싶으면 -u_Time, 빠르게 하고 싶으면 u_Time을 배수
 
 	newPosition += vec4(dX, dY, 0, 0);
@@ -28,6 +29,7 @@ void Flag(){
 
 	float newColor = (sin(2 * value * c_PI + u_Time * flagSpeed) + 1) / 2;	//0~1
 	v_Color = vec4(newColor);
+	v_UV = vec2(a_Position.x + 0.5, 0.5 - a_Position.y);
 }
 
 void Wave()

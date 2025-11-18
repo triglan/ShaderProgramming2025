@@ -31,6 +31,7 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 
 	//Create Textures
 	m_RGBTexture = CreatePngTexture("./rgb.png", GL_NEAREST);
+	m_Texture0 = CreatePngTexture("./rgb.png", GL_NEAREST);
 
 	//Fill Points
 	int index = 0;
@@ -591,6 +592,11 @@ void Renderer::DrawGridMesh()
 
 	int uTimeLoc = glGetUniformLocation(shader, "u_Time"); // lec3 시간 셰이더
 	glUniform1f(uTimeLoc, m_time);
+
+	int uTextureLoc = glGetUniformLocation(shader, "m_Texture0"); // lec3 시간 셰이더
+	glUniform1i(uTextureLoc, 0);
+
+	glBindTexture(GL_TEXTURE_2D, m_RGBTexture);
 
 	int uPointsLoc = glGetUniformLocation(shader, "u_Points");//Location인거 주의하라고 하심
 	glUniform4fv(uPointsLoc, 100, m_Points);
