@@ -23,7 +23,7 @@ void Circles(){
     vec2 center = vec2(0.5, 0.5);
     float d = distance(newUV, center);
     
-    float value = sin(d*4*c_PI);
+    float value = sin(d*4*c_PI * 5 + u_Time);
     vec4 newColor = vec4(value);
 
 
