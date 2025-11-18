@@ -34,7 +34,7 @@ void Flag(){
     vec4 newColor = vec4(0);
 
     float width = 0.2;
-    float sinValue = 0.2 * sin(newUV.x * 2 * c_PI + u_Time * 5);
+    float sinValue = v_UV.x * 0.2 * sin(newUV.x * 2 * c_PI + u_Time * 2);
 
     if(newUV.y < sinValue + width && newUV.y > sinValue - width){
         newColor = vec4(1);
