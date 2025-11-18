@@ -46,9 +46,17 @@ void Flag(){
 
 }
 
+void Q1(){
+    vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1
+    vec4 newColor = texture(u_RGBTexture, newUV);
+
+    FragColor = newColor;
+}
+
 void main()
 {
     //Test();
     //Circles();
-    Flag();
+    //Flag();
+    Q1();
 }
