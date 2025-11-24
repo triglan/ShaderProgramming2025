@@ -154,15 +154,14 @@ void Brick_Horizontal_AI(){
 
 void Digit(){
     FragColor = texture(u_DigitTexture, v_UV);
-
 }
 
 void Digit_Num(){
     float tx = v_UV.x;
     float ty = v_UV.y;
 
-    tx *= 0.2;
-    ty *= 0.5;
+    tx = 0.2 * v_UV.x + 0.2;
+    ty = 0.5 * v_UV.y;
     FragColor = texture(u_NumTexture, vec2(tx, ty));
 }
 void main()
