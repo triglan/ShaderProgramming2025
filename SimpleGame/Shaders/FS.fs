@@ -169,7 +169,7 @@ void Digit_Num(){
 }
 
 void Digit_Num_Professor(){
-    int digit = 3;
+    int digit = int(u_Time) % 10;
 
     int tileIndex = (digit + 9) % 10; // 원래는 1~0인데 0~9로 구현하기 위해서 +9를 해준 것
     float offX = float(tileIndex % 5) / 5;//시험에 여기가 빈칸
