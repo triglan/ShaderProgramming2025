@@ -161,8 +161,8 @@ void Digit_Num(){
     float tx = v_UV.x;
     float ty = v_UV.y;
 
-
-
+    tx *= 0.2;
+    ty *= 0.5;
     FragColor = texture(u_NumTexture, vec2(tx, ty));
 }
 void main()
