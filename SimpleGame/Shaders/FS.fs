@@ -88,7 +88,7 @@ void Q2(){
     FragColor = newColor;
 }
 
-void Q3(){
+void Brick_Horizontal(){
     vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1 left top (0,0)
 
     float x = 0;
@@ -107,7 +107,7 @@ void Q3(){
     FragColor = newColor;
 }
 
-void Q3_professor(){
+void Brick_Horizontal_professor(){
     vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1 left top (0,0)
 
     float x = fract(newUV.x*2) + floor(newUV.y*2 + 1) * 0.5; 
@@ -117,6 +117,18 @@ void Q3_professor(){
     FragColor = newColor;
 }
 
+void Brick_Vertical(){
+    vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1 left top (0,0)
+
+    //float x = fract(newUV.x*2) + floor(newUV.y*2 + 1) * 0.5; 
+    float x = fract(newUV.x*2); 
+    float y = fract(newUV.y*2) + floor(newUV.x*2) * 0.5;
+
+    vec4 newColor = texture(u_RGBTexture, vec2(x,y));
+    FragColor = newColor;
+}
+
+
 void main()
 {
     //Test();
@@ -124,6 +136,7 @@ void main()
     //Flag();
     //Q1();
     //Q2();
-    //Q3();
-    Q3_professor();
+    //Brick_Horizontal();
+    //Brick_Horizontal_professor();
+    Brick_Vertical();
 }
