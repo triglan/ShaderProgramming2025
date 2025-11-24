@@ -160,7 +160,7 @@ void Digit_Num(){
     float tx = v_UV.x;
     float ty = v_UV.y;
 
-    tx = 0.2 * v_UV.x + 0.2;
+    tx = 0.2 * v_UV.x + 0.2 * floor(u_Time);
     ty = 0.5 * v_UV.y;
     FragColor = texture(u_NumTexture, vec2(tx, ty));
 }
