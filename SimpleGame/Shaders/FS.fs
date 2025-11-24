@@ -110,8 +110,10 @@ void Brick_Horizontal(){
 void Brick_Horizontal_professor(){
     vec2 newUV = vec2(v_UV.x, v_UV.y);  //0~1 left top (0,0)
 
-    float x = fract(newUV.x*2) + floor(newUV.y*2 + 1) * 0.5; 
-    float y = fract(newUV.y*2);
+    float rCount = 2;
+    float sAmount = 0.5;
+    float x = fract(newUV.x*rCount) + floor(newUV.y*rCount + 1) * sAmount; 
+    float y = fract(newUV.y*rCount);
 
     vec4 newColor = texture(u_RGBTexture, vec2(x,y));
     FragColor = newColor;
@@ -128,6 +130,24 @@ void Brick_Vertical(){
     FragColor = newColor;
 }
 
+void Brick_Horizontal_AI(){
+    // 2 x 2 타일 생성
+    vec2 tileUV = v_UV * 2.0;
+    
+    // row : 0 = 아래줄, 1 = 위줄
+    float row = floor(tileUV.y);
+
+    // 아래줄: 온전한 타일 두 개
+    // 위줄: 반칸/온전/반칸 구조 → x 좌표에 절반 오프셋
+    float xOffset = (row == 1.0) ? 0.5 : 0.0;
+
+    // fract 로 반복 영역 자르기
+    float u = fract(tileUV.x + xOffset);
+    float v = fract(tileUV.y);
+
+    vec4 color = texture(u_RGBTexture, vec2(u, v));
+    FragColor = color;
+}
 
 void main()
 {
@@ -138,5 +158,6 @@ void main()
     //Q2();
     //Brick_Horizontal();
     //Brick_Horizontal_professor();
-    Brick_Vertical();
+    //Brick_Vertical();
+    Brick_Horizontal_AI();
 }

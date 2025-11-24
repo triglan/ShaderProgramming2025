@@ -593,10 +593,14 @@ void Renderer::DrawGridMesh()
 	int uTimeLoc = glGetUniformLocation(shader, "u_Time"); // lec3 시간 셰이더
 	glUniform1f(uTimeLoc, m_time);
 
-	int uTextureLoc = glGetUniformLocation(shader, "m_Texture0"); // lec3 시간 셰이더
-	glUniform1i(uTextureLoc, 0);
 
+	int uTextureLoc = glGetUniformLocation(shader, "m_Texture0"); // lec3 시간 셰이더
+	glUniform1i(uTextureLoc, 1);// 얘 번호에 따라 어떤 텍스처를 쓰는 지 결정 가능
+
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_RGBTexture);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m_Texture0);
 
 	int uPointsLoc = glGetUniformLocation(shader, "u_Points");//Location인거 주의하라고 하심
 	glUniform4fv(uPointsLoc, 100, m_Points);
