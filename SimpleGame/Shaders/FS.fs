@@ -157,11 +157,26 @@ void Digit(){
 }
 
 void Digit_Num(){
-    float tx = v_UV.x;
-    float ty = v_UV.y;
+    int digit = 3;
 
-    tx = 0.2 * v_UV.x + 0.2 * floor(u_Time);
-    ty = 0.5 * v_UV.y;
+    float offX = 0.2 * floor(u_Time);//½ÃÇè¿¡ ¿©±â°¡ ºóÄ­
+    float offY = 0.5 * floor(u_Time/5);
+
+    float tx = 0.2 * v_UV.x + offX;
+    float ty = 0.5 * v_UV.y + offY;
+
+    FragColor = texture(u_NumTexture, vec2(tx, ty));
+}
+
+void Digit_Num_Professor(){
+    int digit = 3;
+
+    float offX = 0.2 * 3;//½ÃÇè¿¡ ¿©±â°¡ ºóÄ­
+    float offY = 0.5 * 2;
+
+    float tx = 0.2 * v_UV.x + offX;
+    float ty = 0.5 * v_UV.y + offY;
+
     FragColor = texture(u_NumTexture, vec2(tx, ty));
 }
 void main()
@@ -177,4 +192,5 @@ void main()
     //Brick_Horizontal_AI();
     //Digit();
     Digit_Num();
+    //Digit_Num_Professor();
 }
