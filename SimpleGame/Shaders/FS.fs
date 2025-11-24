@@ -171,11 +171,12 @@ void Digit_Num(){
 void Digit_Num_Professor(){
     int digit = 3;
 
-    float offX = 0.2 * 3;//시험에 여기가 빈칸
-    float offY = 0.5 * 2;
+    int tileIndex = (digit + 9) % 10; // 원래는 1~0인데 0~9로 구현하기 위해서 +9를 해준 것
+    float offX = float(tileIndex % 5) / 5;//시험에 여기가 빈칸
+    float offY = floor(float(tileIndex) / 5) / 2;
 
-    float tx = 0.2 * v_UV.x + offX;
-    float ty = 0.5 * v_UV.y + offY;
+    float tx = v_UV.x / 5 + offX;
+    float ty = v_UV.y / 2 + offY;
 
     FragColor = texture(u_NumTexture, vec2(tx, ty));
 }
@@ -191,6 +192,6 @@ void main()
     //Brick_Vertical();
     //Brick_Horizontal_AI();
     //Digit();
-    Digit_Num();
-    //Digit_Num_Professor();
+    //Digit_Num();
+    Digit_Num_Professor();
 }
