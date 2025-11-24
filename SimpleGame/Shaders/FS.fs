@@ -180,6 +180,43 @@ void Digit_Num_Professor(){
 
     FragColor = texture(u_NumTexture, vec2(tx, ty));
 }
+
+void Digit_Num_AI(){
+
+    int value = int(u_Time) % 100000;  // 0~99999
+
+    int d0 = (value / 10000) % 10; // 만
+    int d1 = (value / 1000) % 10;  // 천
+    int d2 = (value / 100) % 10;   // 백
+    int d3 = (value / 10) % 10;    // 십
+    int d4 = value % 10;           // 일
+
+    // 자리 선택 (0~4)
+    int seg = int(v_UV.x * 5.0);
+
+    // 로컬 UV (0~1)
+    vec2 localUV = vec2(fract(v_UV.x * 5.0), v_UV.y);
+
+    // 세그먼트별 digit
+    int digit = 0;
+    if(seg == 0) digit = d0;
+    else if(seg == 1) digit = d1;
+    else if(seg == 2) digit = d2;
+    else if(seg == 3) digit = d3;
+    else digit = d4;
+
+    // 아틀라스 타일 보정 (1~0 배열 대응)
+    int tileIndex = (digit + 9) % 10;
+
+    float offX = float(tileIndex % 5) / 5.0;
+    float offY = floor(float(tileIndex) / 5.0) / 2.0;
+
+    float tx = localUV.x / 5.0 + offX;
+    float ty = localUV.y / 2.0 + offY;
+
+    FragColor = texture(u_NumTexture, vec2(tx, ty));
+}
+
 void main()
 {
     //Test();
@@ -193,5 +230,6 @@ void main()
     //Brick_Horizontal_AI();
     //Digit();
     //Digit_Num();
-    Digit_Num_Professor();
+    //Digit_Num_Professor();
+    Digit_Num_AI();
 }
