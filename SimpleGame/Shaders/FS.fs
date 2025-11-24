@@ -5,6 +5,7 @@ layout(location=0) out vec4 FragColor;
 in vec2 v_UV;
 
 uniform sampler2D u_RGBTexture;
+uniform sampler2D u_DigitTexture;
 uniform float u_Time;
 
 const float c_PI = 3.141592;
@@ -149,6 +150,10 @@ void Brick_Horizontal_AI(){
     FragColor = color;
 }
 
+void Digit(){
+    FragColor = texture(u_DigitTexture, v_UV);
+
+}
 void main()
 {
     //Test();
@@ -159,5 +164,6 @@ void main()
     //Brick_Horizontal();
     //Brick_Horizontal_professor();
     //Brick_Vertical();
-    Brick_Horizontal_AI();
+    //Brick_Horizontal_AI();
+    Digit();
 }

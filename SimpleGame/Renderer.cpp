@@ -30,9 +30,19 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	GenerateParticles(2500);
 
 	//Create Textures
-	m_RGBTexture = CreatePngTexture("./rgb.png", GL_NEAREST);
-	m_Texture0 = CreatePngTexture("./rgb.png", GL_NEAREST);
-
+	m_RGBTexture = CreatePngTexture("./Resources/rgb.png", GL_NEAREST);
+	m_TwiceTexture = CreatePngTexture("./Resources/twice.png", GL_NEAREST);
+	m_0Texture = CreatePngTexture("./Resources/0.png", GL_NEAREST);
+	m_1Texture = CreatePngTexture("./Resources/1.png", GL_NEAREST);
+	m_2Texture = CreatePngTexture("./Resources/2.png", GL_NEAREST);
+	m_3Texture = CreatePngTexture("./Resources/3.png", GL_NEAREST);
+	m_4Texture = CreatePngTexture("./Resources/4.png", GL_NEAREST);
+	m_5Texture = CreatePngTexture("./Resources/5.png", GL_NEAREST);
+	m_6Texture = CreatePngTexture("./Resources/6.png", GL_NEAREST);
+	m_7Texture = CreatePngTexture("./Resources/7.png", GL_NEAREST);
+	m_8Texture = CreatePngTexture("./Resources/8.png", GL_NEAREST);
+	m_9Texture = CreatePngTexture("./Resources/9.png", GL_NEAREST);
+	m_NumTexture = CreatePngTexture("./Resources/numbers.png", GL_NEAREST);
 	//Fill Points
 	int index = 0;
 	for (int i = 0; i < 100; i++) {
@@ -593,14 +603,33 @@ void Renderer::DrawGridMesh()
 	int uTimeLoc = glGetUniformLocation(shader, "u_Time"); // lec3 시간 셰이더
 	glUniform1f(uTimeLoc, m_time);
 
-
-	int uTextureLoc = glGetUniformLocation(shader, "m_Texture0"); // lec3 시간 셰이더
-	glUniform1i(uTextureLoc, 1);// 얘 번호에 따라 어떤 텍스처를 쓰는 지 결정 가능
+	int uTextureLoc = glGetUniformLocation(shader, "m_RGBTexture"); // lec3 시간 셰이더
+	glUniform1i(uTextureLoc, 0);
+	int uDigitTextureLoc = glGetUniformLocation(shader, "u_DigitTexture"); // lec3 시간 셰이더
+	glUniform1i(uDigitTextureLoc, (int)floor(m_time) % 10);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_RGBTexture);
+	glBindTexture(GL_TEXTURE_2D, m_0Texture);
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, m_Texture0);
+	glBindTexture(GL_TEXTURE_2D, m_1Texture);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, m_2Texture);
+	glActiveTexture(GL_TEXTURE3);
+	glBindTexture(GL_TEXTURE_2D, m_3Texture);
+	glActiveTexture(GL_TEXTURE4);
+	glBindTexture(GL_TEXTURE_2D, m_4Texture);
+	glActiveTexture(GL_TEXTURE5);
+	glBindTexture(GL_TEXTURE_2D, m_5Texture);
+	glActiveTexture(GL_TEXTURE6);
+	glBindTexture(GL_TEXTURE_2D, m_6Texture);
+	glActiveTexture(GL_TEXTURE7);
+	glBindTexture(GL_TEXTURE_2D, m_7Texture);
+	glActiveTexture(GL_TEXTURE8);
+	glBindTexture(GL_TEXTURE_2D, m_8Texture);
+	glActiveTexture(GL_TEXTURE9);
+	glBindTexture(GL_TEXTURE_2D, m_9Texture);
+	glActiveTexture(GL_TEXTURE10);
+	glBindTexture(GL_TEXTURE_2D, m_NumTexture);
 
 	int uPointsLoc = glGetUniformLocation(shader, "u_Points");//Location인거 주의하라고 하심
 	glUniform4fv(uPointsLoc, 100, m_Points);
