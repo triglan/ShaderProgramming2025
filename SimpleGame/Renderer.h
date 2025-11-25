@@ -24,6 +24,7 @@ public:
 	void DrawFullScreenColor(float r, float g, float b, float a);
 	void DrawFS();
 	void DrawTexture(float x, float y, float sx, float sy, GLuint TexID);
+	void DrawDebugTextures();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);

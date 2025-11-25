@@ -185,8 +185,8 @@ void Renderer::CreateVertexBufferObjects()
 	float texRect[]
 		=
 	{
-		-1, -1, 0, 0, 1,
-		1, 1, 0, 1, 0,
+		-1,	-1,	0,	0,	1,
+		1,	1,	0,	1,	0,
 		-1, 1, 0, 0, 0,
 		-1, -1, 0, 0, 1,
 		1, -1, 0, 1, 1,
@@ -527,9 +527,13 @@ void Renderer::DrawTexture(float x, float y, float sx, float sy, GLuint TexID) {
 
 	int uTex = glGetUniformLocation(shader, "u_TexID");
 	glUniform1i(uTex, 0);
+	int uSize = glGetUniformLocation(shader, "u_Size");
+	glUniform2i(uTex, sx, sy);
+	int uTran = glGetUniformLocation(shader, "u_Tran");
+	glUniform2i(uTex, x, y);//Rectangle¿« ºæ≈Õ ¡¬«•
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_RGBTexture);
+	glBindTexture(GL_TEXTURE_2D, TexID);
 
 	int aPos = glGetAttribLocation(shader, "a_Pos");
 	int aTex = glGetAttribLocation(shader, "a_Tex");
@@ -541,8 +545,12 @@ void Renderer::DrawTexture(float x, float y, float sx, float sy, GLuint TexID) {
 	glVertexAttribPointer(aTex, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (GLvoid*)(sizeof(float) * 3));
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
+}
 
-	glDisable(GL_BLEND);
+void Renderer::DrawDebugTextures()
+{
+	DrawTexture(-0.8, -0.8, 0.2, 0.2, m_RGBTexture);
+	DrawTexture(-0.4, -0.8, 0.2, 0.2, m_TwiceTexture);
 }
 
 GLuint Renderer::CreatePngTexture(char* filePath, GLuint samplingMethod)
