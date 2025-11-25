@@ -23,6 +23,7 @@ public:
 	void DrawGridMesh();
 	void DrawFullScreenColor(float r, float g, float b, float a);
 	void DrawFS();
+	void DrawTexture(float x, float y, float sx, float sy, GLuint TexID);
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
@@ -87,5 +88,9 @@ private:
 	GLuint m_8Texture = 0;
 	GLuint m_9Texture = 0;
 	GLuint m_NumTexture = 0;
+
+	//Texture
+	GLuint m_TexVBO = 0;
+	GLuint m_TexShader = 0;
 };
 
