@@ -25,6 +25,7 @@ public:
 	void DrawFS();
 	void DrawTexture(float x, float y, float sx, float sy, GLuint TexID);
 	void DrawDebugTextures();
+	void DrawFBOs();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
@@ -38,6 +39,7 @@ private:
 	void GenerateParticles(int numParticle);
 	void CreateGridMesh(int x, int y);
 	GLuint CreatePngTexture(char* filePath, GLuint samplingMethod);
+	void CreateFBOs();
 
 	bool m_Initialized = false;
 	
@@ -93,5 +95,19 @@ private:
 	//Texture
 	GLuint m_TexVBO = 0;
 	GLuint m_TexShader = 0;
+
+	//FBO Color Buffers
+	GLuint m_RT0 = 0;
+	GLuint m_RT1 = 0;
+	GLuint m_RT2 = 0;
+	GLuint m_RT3 = 0;
+	GLuint m_RT4 = 0;
+
+	//FB0s
+	GLuint m_FB00 = 0;
+	GLuint m_FB01 = 0;
+	GLuint m_FB02 = 0;
+	GLuint m_FB03 = 0;
+	GLuint m_FB04 = 0;
 };
 
